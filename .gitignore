@@ -52,3 +52,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# M33 Data 
+M33_sample.txt
