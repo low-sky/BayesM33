@@ -55,3 +55,7 @@ target/
 
 # M33 Data 
 M33_sample.txt
+writeup.pdf
+writeup.log
+writeup.dvi
+writeup.aux
