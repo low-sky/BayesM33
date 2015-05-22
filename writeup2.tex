@@ -1,0 +1,88 @@
+\documentclass[12pt,preprint]{aastex}
+%\documentclass{emulateapj}
+\usepackage{amsmath,hyperref}
+
+\begin{document}
+
+%% LaTeX will automatically break titles if they run longer than
+%% one line. However, you may use \\ to force a line break if
+%% you desire.
+
+\title{Marginalization of the $X_{\mathrm{CO}}$ problem}
+
+Given the initial notation that the probability ($p$)
+
+\begin{eqnarray*}
+p &\propto & \prod_i \frac{1}{(2\pi)^{3/2}\sigma_{\mathrm{CO},i}  
+\sigma_{\mathrm{HI},i}  \sigma_{\mathrm{dust}}}  
+\exp\left[-\frac{(I_{\mathrm{CO},i}-I_{\mathrm{CO,obs},i})^2}
+{2\sigma^2_{\mathrm{CO},i}}\right]
+\exp\left[-\frac{(\Sigma_{\mathrm{HI},i}-\Sigma_{\mathrm{HI,obs},i})^2}
+{2\sigma^2_{\mathrm{HI},i}}\right]\times \\
+&& \exp\left[-\frac{(\delta_{\mathrm{GDR}}\Sigma_{\mathrm{dust}}- \alpha_{\mathrm{CO}} I_{\mathrm{CO}}-\Sigma_{\mathrm{HI}}-K_{dark})^2}{2\sigma_{\mathrm{dust}}^2}\right]
+\end{eqnarray*}
+
+Considering only the $i$th term (and dropping the $i$ subscript for simplicity, we eliminate the nuisance variables $I_{\mathrm{CO},i}$ and $I_{\mathrm{HI},i}$ by marginalizing over them.  Considering the posterior conditioned on the data  ($\mathbf{D}\equiv I_{\mathrm{CO}},\sigma_{\mathrm{CO}}\cdots$),
+\[
+p(\alpha_{\mathrm{CO}},\delta_{\mathrm{GDR}},c,\sigma_{\mathrm{dust}}|\mathbf{D}) = \int d I_{\mathrm{CO}} \int d I_{\mathrm{HI}} ~ p(\alpha_{\mathrm{CO}},\delta_{\mathrm{GDR}},c,\sigma_{\mathrm{dust}}|\mathbf{D}, I_{\mathrm{CO}}, I_{\mathrm{HI}})
+\]
+To simplify the integral, we adopt the notation from the paper:
+\begin{eqnarray*}
+a & \equiv & 1/\delta_{\mathrm{GDR}}\\
+b & \equiv & \alpha_{\mathrm{CO}}/\delta_{\mathrm{GDR}}\\
+c & \equiv & K_{dark}/\delta_{\mathrm{GDR}}
+\end{eqnarray*}
+With these simplifications, the marginalization becomes
+\begin{eqnarray*}
+p &\propto& \int_{-\infty}^{\infty}\, dI_{\mathrm{CO}}
+\int_{-\infty}^{\infty}\, d\Sigma_{\mathrm{HI}} \frac{1}{(2\pi)^{3/2}
+\sigma_{\mathrm{CO}}\sigma_{\mathrm{HI}}\sigma_{\mathrm{dust}}} \cdot\\
+&&
+\exp\left[-\frac{(I_{\mathrm{CO}}-I_{\mathrm{CO,obs}})^2}
+{2\sigma^2_{\mathrm{CO}}}\right]
+\exp\left[-\frac{(\Sigma_{\mathrm{HI}}-\Sigma_{\mathrm{HI,obs}})^2}
+{2\sigma^2_{\mathrm{HI}}}\right]\cdot \\
+&& \exp\left[-\frac{(\delta_{\mathrm{GDR}}\Sigma_{\mathrm{dust}}- \alpha_{\mathrm{CO}} I_{\mathrm{CO}}-\Sigma_{\mathrm{HI}}-K_{dark})^2}{2\sigma_{\mathrm{dust}}^2}\right]
+\end{eqnarray*}
+This follows the basic pattern of expanding all the terms, collecting
+terms that are quadratic and linear in the integration variable, and
+completing the square so the term becomes a Gaussian.  This is nominally tractable but I ended up using Mathematica to arrive at
+\begin{eqnarray*}
+p &\propto& \prod_i  \left((2\pi)^{3/2}
+\sigma_{\mathrm{CO},i}\sigma_{\mathrm{HI},i}\sigma_{\mathrm{dust}}\right)^{-1}
+\left(\frac{a^2}{\sigma^2_{\mathrm{dust}}}+\frac{1}{\sigma^2_{\mathrm{HI},i}}\right)^{-1/2}
+\left(\frac{\sigma^2_{\mathrm{dust}}+b^2\sigma^2_{\mathrm{CO},i}+a^2\sigma^2_{\mathrm{HI},i}}{\sigma^2_{\mathrm{dust}}\sigma^2_{\mathrm{CO},i}+a^2 \sigma^2_{\mathrm{CO},i}\sigma^2_{\mathrm{HI},i} }\right)^{-1/2}\cdot\\
+&& \exp\left[-\frac{(c+bI_{\mathrm{CO,obs},i}+
+a \Sigma_{\mathrm{HI,obs},i}-\Sigma_{\mathrm{dust},i})^2}{2(\sigma^2_{\mathrm{dust}}+b^2\sigma^2_{\mathrm{CO},i}+a^2\sigma^2_{\mathrm{HI},i})}\right].
+\end{eqnarray*}
+The above assumes that $I_{\mathrm{CO}}$ and $I_{\mathrm{HI}}$ can
+take negative values but this is not appropriate.  Ideally, we would
+carry out both integrals over the domain $[0,\infty)$ but this is not
+tractable even for Mathematica.  However, one integral can be carried
+out over this interval if the other is carried over all
+values. Because the {\sc Hi} emission is likely better characterized
+and larger than zero observationally, we carry that integral over over
+the full range and integrate the CO over  $[0,\infty)$.  This leads to
+another expression for $p$ similar to the last with an additional
+error function term:
+
+\begin{eqnarray*}
+p &\propto& \prod_i  \left((2\pi)^{3/2}
+\sigma_{\mathrm{CO},i}\sigma_{\mathrm{HI},i}\sigma_{\mathrm{dust}}\right)^{-1}
+\left(\frac{a^2}{\sigma^2_{\mathrm{dust}}}+\frac{1}{\sigma^2_{\mathrm{HI},i}}\right)^{-1/2}
+\left(\frac{\sigma^2_{\mathrm{dust}}+b^2\sigma^2_{\mathrm{CO},i}+
+a^2\sigma^2_{\mathrm{HI},i}}{\sigma^2_{\mathrm{dust}}\sigma^2_{\mathrm{CO},i}+
+a^2 \sigma^2_{\mathrm{CO},i}\sigma^2_{\mathrm{HI},i} }\right)^{-1/2}\cdot\\
+&& \exp\left[-\frac{(c+bI_{\mathrm{CO,obs},i}+
+a \Sigma_{\mathrm{HI,obs},i}-\Sigma_{\mathrm{dust},i})^2}{2(\sigma^2_{\mathrm{dust}}+b^2\sigma^2_{\mathrm{CO},i}+a^2\sigma^2_{\mathrm{HI},i})}\right]\cdot
+\\
+&&\left\{1+\mathrm{erf}\left[\frac{-b(c+a\Sigma_{\mathrm{HI,obs},i}-\Sigma_{\mathrm{dust},i})\sigma^2_{\mathrm{CO},i}+I_{\mathrm{CO,obs},i}(\sigma^2_{\mathrm{dust}}+a^2\sigma^2_{\mathrm{HI},i})}{\sqrt{2\sigma^2_{\mathrm{CO},i}
+(\sigma^2_{\mathrm{dust}}+a^2\sigma^2_{\mathrm{HI},i})
+({\sigma^2_{\mathrm{dust}}+b^2\sigma^2_{\mathrm{CO},i}+
+a^2\sigma^2_{\mathrm{HI},i}})}}
+\right]\right\}
+\end{eqnarray*}
+
+
+
+\end{document}
